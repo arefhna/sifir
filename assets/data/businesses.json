@@ -1,0 +1,10 @@
+[
+  {"id":"small_shop","name":"Kiçik mağaza","category":"Pərakəndə","description":"Sadə küçə mağazası, sabit gündəlik gəlir.","initialCost":3000,"dailyIncome":120,"maintenance":40,"risk":20,"growth":0.02,"reputationRequirement":15,"minDay":5,"icon":"storefront"},
+  {"id":"online_shop","name":"Onlayn mağaza","category":"E-ticarət","description":"İnternet üzərindən satış, aşağı əməliyyat xərci.","initialCost":5000,"dailyIncome":200,"maintenance":60,"risk":25,"growth":0.03,"reputationRequirement":25,"minDay":8,"icon":"shopping_cart"},
+  {"id":"service_center","name":"Servis mərkəzi","category":"Xidmətlər","description":"Texnika təmiri və texniki xidmət.","initialCost":8000,"dailyIncome":320,"maintenance":100,"risk":28,"growth":0.025,"reputationRequirement":35,"minDay":12,"icon":"build"},
+  {"id":"cafe","name":"Kafe","category":"Qida","description":"Kiçik kafe, gündəlik müştəri axını.","initialCost":15000,"dailyIncome":600,"maintenance":200,"risk":30,"growth":0.02,"reputationRequirement":40,"minDay":15,"icon":"local_cafe"},
+  {"id":"electronics_store","name":"Elektronika mağazası","category":"Elektronika","description":"Böyük elektronika mağazası.","initialCost":25000,"dailyIncome":1000,"maintenance":350,"risk":35,"growth":0.03,"reputationRequirement":50,"minDay":20,"icon":"devices"},
+  {"id":"logistics","name":"Logistika şirkəti","category":"Nəqliyyat","description":"Yük daşıma və çatdırılma xidməti.","initialCost":40000,"dailyIncome":1600,"maintenance":550,"risk":40,"growth":0.035,"reputationRequirement":60,"minDay":25,"icon":"local_shipping"},
+  {"id":"tech_company","name":"Texnologiya şirkəti","category":"Texnologiya","description":"Proqram təminatı və rəqəmsal xidmətlər.","initialCost":80000,"dailyIncome":3200,"maintenance":1100,"risk":45,"growth":0.045,"reputationRequirement":70,"minDay":30,"icon":"memory"},
+  {"id":"real_estate","name":"Daşınmaz əmlak agentliyi","category":"Tikinti","description":"Əmlak alqı-satqısı və icarə xidmətləri.","initialCost":120000,"dailyIncome":4800,"maintenance":1600,"risk":50,"growth":0.03,"reputationRequirement":80,"minDay":40,"icon":"apartment"}
+]
