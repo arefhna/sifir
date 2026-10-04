@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/event_model.dart';
-import '../../data/models/player_state_model.dart';
 import '../../domain/services/event_service.dart';
 import 'game_providers.dart';
 import 'player_notifier.dart';
