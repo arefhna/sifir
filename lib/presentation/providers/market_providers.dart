@@ -30,13 +30,6 @@ final marketCategoriesProvider = Provider<List<String>>((ref) {
   return service.categories(products);
 });
 
-final activeConditionsProvider = Provider<List<MarketCondition>>((ref) {
-  final notifier = ref.watch(playerStateProvider.notifier);
-  return notifier.currentState?.activeInvestments.isEmpty ?? true
-      ? const []
-      : const [];
-});
-
 final filteredProductsProvider =
     Provider.family<List<Product>, String>((ref, category) {
   final products = ref.watch(marketProductsProvider);
