@@ -1,0 +1,22 @@
+[
+  {"id":"phone_case","name":"Telefon qabı","category":"Elektronika","basePrice":15,"currentPrice":15,"demand":70,"supply":80,"risk":25,"trend":0,"profitMargin":1.4,"duration":3,"icon":"phone_iphone"},
+  {"id":"phone_charger","name":"Şarj cihazı","category":"Elektronika","basePrice":25,"currentPrice":25,"demand":65,"supply":70,"risk":20,"trend":0,"profitMargin":1.5,"duration":3,"icon":"power"},
+  {"id":"headphones","name":"Qulaqlıq","category":"Elektronika","basePrice":45,"currentPrice":45,"demand":60,"supply":55,"risk":30,"trend":0,"profitMargin":1.6,"duration":5,"icon":"headphones"},
+  {"id":"powerbank","name":"Powerbank","category":"Elektronika","basePrice":60,"currentPrice":60,"demand":55,"supply":60,"risk":28,"trend":0,"profitMargin":1.5,"duration":5,"icon":"battery_charging_full"},
+  {"id":"tshirt","name":"Futbolka","category":"Geyim","basePrice":12,"currentPrice":12,"demand":75,"supply":85,"risk":22,"trend":0,"profitMargin":1.6,"duration":4,"icon":"checkroom"},
+  {"id":"jeans","name":"Cins şalvar","category":"Geyim","basePrice":45,"currentPrice":45,"demand":60,"supply":65,"risk":30,"trend":0,"profitMargin":1.7,"duration":6,"icon":"checkroom"},
+  {"id":"sneakers","name":"İdman ayaqqabısı","category":"Geyim","basePrice":80,"currentPrice":80,"demand":55,"supply":50,"risk":35,"trend":0,"profitMargin":1.8,"duration":7,"icon":"directions_run"},
+  {"id":"coffee_bean","name":"Qəhvə dəni","category":"Qida","basePrice":18,"currentPrice":18,"demand":80,"supply":75,"risk":18,"trend":0,"profitMargin":1.5,"duration":4,"icon":"coffee"},
+  {"id":"tea","name":"Çay","category":"Qida","basePrice":10,"currentPrice":10,"demand":85,"supply":90,"risk":15,"trend":0,"profitMargin":1.4,"duration":4,"icon":"emoji_food_beverage"},
+  {"id":"sweets","name":"Şirniyyat","category":"Qida","basePrice":8,"currentPrice":8,"demand":90,"supply":95,"risk":12,"trend":0,"profitMargin":1.5,"duration":3,"icon":"cake"},
+  {"id":"laptop","name":"Noutbuk","category":"Texnologiya","basePrice":800,"currentPrice":800,"demand":45,"supply":40,"risk":45,"trend":0,"profitMargin":1.35,"duration":10,"icon":"laptop"},
+  {"id":"smartphone","name":"Smartfon","category":"Texnologiya","basePrice":500,"currentPrice":500,"demand":60,"supply":55,"risk":40,"trend":0,"profitMargin":1.3,"duration":8,"icon":"smartphone"},
+  {"id":"tablet","name":"Planşet","category":"Texnologiya","basePrice":350,"currentPrice":350,"demand":50,"supply":50,"risk":38,"trend":0,"profitMargin":1.32,"duration":8,"icon":"tablet"},
+  {"id":"tiles","name":"Keramik plitə","category":"Tikinti","basePrice":25,"currentPrice":25,"demand":55,"supply":60,"risk":28,"trend":0,"profitMargin":1.45,"duration":6,"icon":"grid_on"},
+  {"id":"paint","name":"Boya","category":"Tikinti","basePrice":30,"currentPrice":30,"demand":60,"supply":65,"risk":25,"trend":0,"profitMargin":1.4,"duration":5,"icon":"format_paint"},
+  {"id":"tools","name":"Alət dəsti","category":"Tikinti","basePrice":120,"currentPrice":120,"demand":50,"supply":55,"risk":32,"trend":0,"profitMargin":1.5,"duration":7,"icon":"handyman"},
+  {"id":"delivery","name":"Kuryer xidməti","category":"Xidmətlər","basePrice":5,"currentPrice":5,"demand":95,"supply":70,"risk":20,"trend":0,"profitMargin":1.6,"duration":1,"icon":"delivery_dining"},
+  {"id":"repair","name":"Təmir xidməti","category":"Xidmətlər","basePrice":40,"currentPrice":40,"demand":70,"supply":65,"risk":25,"trend":0,"profitMargin":1.55,"duration":2,"icon":"build"},
+  {"id":"taxi","name":"Taksi sifarişi","category":"Nəqliyyat","basePrice":7,"currentPrice":7,"demand":85,"supply":80,"risk":22,"trend":0,"profitMargin":1.5,"duration":1,"icon":"local_taxi"},
+  {"id":"cargo","name":"Yük daşıma","category":"Nəqliyyat","basePrice":90,"currentPrice":90,"demand":55,"supply":60,"risk":30,"trend":0,"profitMargin":1.45,"duration":4,"icon":"local_shipping"}
+]
