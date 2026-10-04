@@ -29,6 +29,37 @@ jobs:
       - name: Flutter version info
         run: flutter --version
 
+      - name: Backup lib and assets
+        run: |
+          mkdir -p /tmp/sifir_backup
+          cp -r lib /tmp/sifir_backup/lib
+          cp -r assets /tmp/sifir_backup/assets
+          cp pubspec.yaml /tmp/sifir_backup/pubspec.yaml
+          cp analysis_options.yaml /tmp/sifir_backup/analysis_options.yaml || true
+
+      - name: Clean workspace
+        run: |
+          rm -rf lib assets pubspec.yaml analysis_options.yaml android ios web linux macos windows test
+
+      - name: Create fresh Flutter project
+        run: |
+          flutter create --org com.sifir --project-name sifir --platforms=android .
+
+      - name: Remove default lib
+        run: |
+          rm -rf lib
+
+      - name: Restore project files
+        run: |
+          cp -r /tmp/sifir_backup/lib lib
+          cp -r /tmp/sifir_backup/assets assets
+          cp /tmp/sifir_backup/pubspec.yaml pubspec.yaml
+          cp /tmp/sifir_backup/analysis_options.yaml analysis_options.yaml || true
+
+      - name: Set app label
+        run: |
+          sed -i 's/android:label="sifir"/android:label="SIFIR"/g' android/app/src/main/AndroidManifest.xml
+
       - name: Get dependencies
         run: flutter pub get
 
