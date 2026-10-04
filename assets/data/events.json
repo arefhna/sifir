@@ -1,0 +1,78 @@
+[
+  {
+    "id":"phone_accessories_drop","title":"Telefon aksesuarlarının qiyməti düşdü","description":"Bazarda telefon aksesuarlarının qiyməti aşağı düşüb. Fürsətdən istifadə edə bilərsən.","type":"opportunity","weight":10,"minDay":1,"minReputation":0,"minCapital":100,
+    "choices":[
+      {"id":"invest_small","label":"İnvestisiya et","description":"800 ₼ investisiya, 3 gün müddət.","cost":800,"expectedReward":1400,"riskPercent":32,"duration":3,"reputationDelta":1,"successMessage":"Uğurlu satış! Qazanc əldə etdin.","failMessage":"Aksesuarlar satılmadı, zərər etdin."}
+    ]
+  },
+  {
+    "id":"new_business_opportunity","title":"Yeni biznes fürsəti","description":"Kiçik mağaza açmaq üçün fürsət yarandı.","type":"opportunity","weight":8,"minDay":5,"minReputation":10,"minCapital":2000,
+    "choices":[
+      {"id":"open_shop","label":"Mağaza aç","description":"2000 ₼ investisiya, gündəlik gəlir yaradacaq.","cost":2000,"expectedReward":3000,"riskPercent":28,"duration":7,"reputationDelta":3,"successMessage":"Mağaza açıldı, ilk müştərilər gəldi.","failMessage":"Mağaza gözlənilən gəlir gətirmədi."}
+    ]
+  },
+  {
+    "id":"competitor_entry","title":"Rəqib şirkət bazara daxil oldu","description":"Yeni rəqib sənin bazar payını təhdid edir.","type":"threat","weight":7,"minDay":10,"minReputation":30,"minCapital":0,
+    "choices":[
+      {"id":"cut_prices","label":"Qiymətləri endir","description":"Qısa müddətli zərər, uzunmüddətli qazanc.","cost":500,"expectedReward":1200,"riskPercent":40,"duration":5,"reputationDelta":2,"successMessage":"Rəqibə tab gətirdin, müştərilər sənə qayıtdı.","failMessage":"Rəqib bazarda üstünlük qazandı."},
+      {"id":"differentiate","label":"Keyfiyyətə fokuslan","description":"Xidməti yaxşılaşdır.","cost":800,"expectedReward":1500,"riskPercent":30,"duration":6,"reputationDelta":4,"successMessage":"Müştərilər keyfiyyəti yüksək qiymətləndirdi.","failMessage":"Xərclər artdı, gəlir artmadı."}
+    ]
+  },
+  {
+    "id":"partner_offer","title":"Tanışın sənə tərəfdaşlıq təklif etdi","description":"Yaxın tanışın biznesə ortaq olmağı təklif edir.","type":"opportunity","weight":6,"minDay":7,"minReputation":20,"minCapital":1000,
+    "choices":[
+      {"id":"accept","label":"Qəbul et","description":"Ortaq biznes qur.","cost":1000,"expectedReward":2200,"riskPercent":35,"duration":8,"reputationDelta":3,"successMessage":"Tərəfdaşlıq uğurlu oldu.","failMessage":"Tərəfdaşlıq gözlənilən nəticəni vermədi."},
+      {"id":"decline","label":"İmtina et","description":"Öz yolunla davam et.","cost":0,"expectedReward":0,"riskPercent":0,"duration":0,"reputationDelta":0,"successMessage":"Təklifi rədd etdin.","failMessage":"Təklif itirildi."}
+    ]
+  },
+  {
+    "id":"unexpected_expense","title":"Gözlənilməz xərc","description":"Təcili xərc yarandı. Ödəməlisən.","type":"threat","weight":9,"minDay":3,"minReputation":0,"minCapital":100,
+    "choices":[
+      {"id":"pay","label":"Ödə","description":"Dərhal ödə, reputasiya qorunur.","cost":300,"expectedReward":0,"riskPercent":0,"duration":0,"reputationDelta":0,"successMessage":"Xərc ödənildi.","failMessage":"Ödəniş alınmadı."},
+      {"id":"ignore","label":"İgnor et","description":"Ödəmə, lakin reputasiya düşəcək.","cost":0,"expectedReward":0,"riskPercent":0,"duration":0,"reputationDelta":-5,"successMessage":"Ödənişdən yayındın.","failMessage":"Reputasiya zədələndi."}
+    ]
+  },
+  {
+    "id":"demand_spike","title":"Bazarda müəyyən məhsula tələb artdı","description":"Elektronika məhsullarına tələb kəskin artıb.","type":"opportunity","weight":8,"minDay":4,"minReputation":5,"minCapital":500,
+    "choices":[
+      {"id":"buy_bulk","label":"Toplu al","description":"Elektronika məhsulu al və sat.","cost":500,"expectedReward":950,"riskPercent":25,"duration":3,"reputationDelta":1,"successMessage":"Tələb yüksək oldu, yaxşı qazanc əldə etdin.","failMessage":"Tələb gözlənilən qədər olmadı."}
+    ]
+  },
+  {
+    "id":"investment_opportunity","title":"Yeni investisiya imkanı açıldı","description":"Startap layihəsinə investisiya təklif olunur.","type":"opportunity","weight":5,"minDay":15,"minReputation":40,"minCapital":5000,
+    "choices":[
+      {"id":"invest","label":"İnvestisiya et","description":"5000 ₼ investisiya, yüksək potensial.","cost":5000,"expectedReward":9000,"riskPercent":45,"duration":14,"reputationDelta":4,"successMessage":"Startap uğurlu oldu!","failMessage":"Startap iflas etdi."}
+    ]
+  },
+  {
+    "id":"company_offer","title":"Şirkət sənə xüsusi təklif göndərdi","description":"Böyük şirkət səninlə əməkdaşlıq etmək istəyir.","type":"opportunity","weight":4,"minDay":20,"minReputation":50,"minCapital":3000,
+    "choices":[
+      {"id":"accept_offer","label":"Qəbul et","description":"Şirkətlə müqavilə imzala.","cost":3000,"expectedReward":6000,"riskPercent":30,"duration":10,"reputationDelta":5,"successMessage":"Müqavilə uğurla bağlandı.","failMessage":"Müqavilə uğursuz oldu."}
+    ]
+  },
+  {
+    "id":"small_rep_gain","title":"Müştəri müsbət rəy yazdı","description":"Bir müştəri sənin xidmətini yüksək qiymətləndirdi.","type":"neutral","weight":10,"minDay":1,"minReputation":0,"minCapital":0,
+    "choices":[
+      {"id":"thanks","label":"Təşəkkür et","description":"Reputasiya +2.","cost":0,"expectedReward":0,"riskPercent":0,"duration":0,"reputationDelta":2,"successMessage":"Reputasiya artdı.","failMessage":""}
+    ]
+  },
+  {
+    "id":"quick_delivery","title":"Sürətli çatdırılma sifarişi","description":"Müştəri təcili çatdırılma istəyir.","type":"opportunity","weight":9,"minDay":2,"minReputation":5,"minCapital":50,
+    "choices":[
+      {"id":"deliver","label":"Çatdır","description":"Qısa müddətli qazanc.","cost":50,"expectedReward":150,"riskPercent":18,"duration":1,"reputationDelta":1,"successMessage":"Sifariş uğurla çatdırıldı.","failMessage":"Çatdırılma gecikdi."}
+    ]
+  },
+  {
+    "id":"bad_review","title":"Müştəri mənfi rəy yazdı","description":"Bir müştəri məhsuldan narazı qaldı.","type":"threat","weight":7,"minDay":3,"minReputation":10,"minCapital":100,
+    "choices":[
+      {"id":"refund","label":"Geri qaytar","description":"Pulu qaytar, reputasiya qoru.","cost":150,"expectedReward":0,"riskPercent":0,"duration":0,"reputationDelta":1,"successMessage":"Müştəri razı qaldı.","failMessage":""},
+      {"id":"ignore_review","label":"İgnor et","description":"Reputasiya düşür.","cost":0,"expectedReward":0,"riskPercent":0,"duration":0,"reputationDelta":-4,"successMessage":"","failMessage":"Reputasiya zədələndi."}
+    ]
+  },
+  {
+    "id":"bulk_deal","title":"Toplu sifariş təklifi","description":"Böyük müştəri toplu sifariş vermək istəyir.","type":"opportunity","weight":6,"minDay":8,"minReputation":25,"minCapital":1500,
+    "choices":[
+      {"id":"accept_bulk","label":"Qəbul et","description":"Toplu sifariş, böyük potensial.","cost":1500,"expectedReward":2900,"riskPercent":33,"duration":5,"reputationDelta":2,"successMessage":"Toplu sifariş uğurla tamamlandı.","failMessage":"Sifariş ləğv edildi."}
+    ]
+  }
+]
