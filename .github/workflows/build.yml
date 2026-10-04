@@ -41,8 +41,10 @@ jobs:
         run: |
           flutter create --org com.sifir --project-name sifir --platforms=android .
 
-      - name: Remove default lib
-        run: rm -rf lib
+      - name: Remove default lib and test
+        run: |
+          rm -rf lib
+          rm -rf test
 
       - name: Restore project files
         run: |
@@ -59,7 +61,7 @@ jobs:
         run: flutter pub get
 
       - name: Analyze code
-  run: flutter analyze --no-fatal-infos --no-fatal-warnings
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
   build:
     needs: analyze
@@ -98,8 +100,10 @@ jobs:
         run: |
           flutter create --org com.sifir --project-name sifir --platforms=android .
 
-      - name: Remove default lib
-        run: rm -rf lib
+      - name: Remove default lib and test
+        run: |
+          rm -rf lib
+          rm -rf test
 
       - name: Restore project files
         run: |
