@@ -1,0 +1,10 @@
+[
+  {"id":"tech_boom","name":"Texnologiya bumları","description":"Texnologiya məhsullarına tələb artır.","affectedCategories":["Texnologiya","Elektronika"],"demandMultiplier":1.4,"priceMultiplier":1.15,"durationDays":5},
+  {"id":"food_demand","name":"Qida tələbi","description":"Qida məhsullarına tələb yüksəlir.","affectedCategories":["Qida"],"demandMultiplier":1.3,"priceMultiplier":1.1,"durationDays":4},
+  {"id":"construction_slow","name":"Tikinti ləngiməsi","description":"Tikinti sektoru zəifləyir.","affectedCategories":["Tikinti"],"demandMultiplier":0.7,"priceMultiplier":0.9,"durationDays":6},
+  {"id":"clothing_trend","name":"Geyim trendi","description":"Geyim satışları artır.","affectedCategories":["Geyim"],"demandMultiplier":1.35,"priceMultiplier":1.12,"durationDays":5},
+  {"id":"fuel_crisis","name":"Yanacaq böhranı","description":"Nəqliyyat xərcləri artır.","affectedCategories":["Nəqliyyat"],"demandMultiplier":0.85,"priceMultiplier":1.25,"durationDays":7},
+  {"id":"services_rise","name":"Xidmət artımı","description":"Xidmətlərə tələb yüksəlir.","affectedCategories":["Xidmətlər"],"demandMultiplier":1.3,"priceMultiplier":1.1,"durationDays":4},
+  {"id":"market_crash","name":"Bazar çöküşü","description":"Ümumi bazar zəifləyir.","affectedCategories":["Elektronika","Texnologiya","Geyim"],"demandMultiplier":0.6,"priceMultiplier":0.85,"durationDays":4},
+  {"id":"consumer_boost","name":"İstehlak artımı","description":"Ümumi tələb artır.","affectedCategories":["Qida","Geyim","Elektronika"],"demandMultiplier":1.2,"priceMultiplier":1.08,"durationDays":5}
+]
