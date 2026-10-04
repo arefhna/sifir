@@ -1,0 +1,7 @@
+[
+  {"id":"ch_daily_income","title":"Gündəlik gəlir","description":"Bir gündə 500 ₼ gəlir əldə et.","type":"capitalTarget","targetValue":500,"rewardCapital":100,"rewardReputation":2},
+  {"id":"ch_no_debt","title":"Borcsuz gün","description":"Bu gün heç bir borc götürmə.","type":"noDebt","targetValue":1,"rewardCapital":50,"rewardReputation":1},
+  {"id":"ch_profit_10","title":"10% gəlir","description":"Bu gün 10% gəlir əldə et.","type":"profitPercent","targetValue":10,"rewardCapital":150,"rewardReputation":2},
+  {"id":"ch_first_business","title":"İlk biznes","description":"Bu gün ilk biznesini al.","type":"businessOwned","targetValue":1,"rewardCapital":200,"rewardReputation":5},
+  {"id":"ch_successful_invest","title":"Uğurlu investisiya","description":"Bu gün uğurlu investisiya et.","type":"investmentSuccess","targetValue":1,"rewardCapital":120,"rewardReputation":3}
+]
