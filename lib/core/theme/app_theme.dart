@@ -25,7 +25,7 @@ class AppTheme {
         titleTextStyle: AppTypography.headline,
         iconTheme: IconThemeData(color: AppColors.textPrimary),
       ),
-      cardTheme: const CardThemeData(
+      cardTheme: const CardTheme(
         color: AppColors.surface,
         elevation: 0,
         margin: EdgeInsets.zero,
@@ -85,7 +85,7 @@ class AppTheme {
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
       ),
-      dialogTheme: const DialogThemeData(
+      dialogTheme: const DialogTheme(
         backgroundColor: AppColors.surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
