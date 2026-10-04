@@ -1,0 +1,13 @@
+[
+  {"id":"first_1000","title":"İlk 1.000 ₼","description":"Kapitalını 1.000 ₼-a çatdır.","icon":"trending_up","targetValue":1000,"type":"capital"},
+  {"id":"first_10000","title":"İlk 10.000 ₼","description":"Kapitalını 10.000 ₼-a çatdır.","icon":"trending_up","targetValue":10000,"type":"capital"},
+  {"id":"first_100000","title":"İlk 100.000 ₼","description":"Kapitalını 100.000 ₼-a çatdır.","icon":"trending_up","targetValue":100000,"type":"capital"},
+  {"id":"millionaire","title":"Milyonçu","description":"1.000.000 ₼ kapitala çat.","icon":"emoji_events","targetValue":1000000,"type":"capital"},
+  {"id":"first_business","title":"İlk biznes","description":"İlk biznesini al.","icon":"storefront","targetValue":1,"type":"businesses"},
+  {"id":"five_businesses","title":"5 biznes","description":"5 biznesə sahib ol.","icon":"storefront","targetValue":5,"type":"businesses"},
+  {"id":"rep_50","title":"Etibarlı","description":"Reputasiyanı 50-ə çatdır.","icon":"verified","targetValue":50,"type":"reputation"},
+  {"id":"rep_100","title":"Güvənilən biznes sahibi","description":"Reputasiyanı 100-ə çatdır.","icon":"verified","targetValue":100,"type":"reputation"},
+  {"id":"first_investment","title":"İlk investisiya","description":"İlk investisiyanı et.","icon":"paid","targetValue":1,"type":"investments"},
+  {"id":"ten_investments","title":"10 investisiya","description":"10 uğurlu investisiya et.","icon":"paid","targetValue":10,"type":"investments"},
+  {"id":"debt_free_30","title":"Borcsuz 30 gün","description":"30 gün borcsuz qal.","icon":"shield","targetValue":30,"type":"debtFreeDays"}
+]
