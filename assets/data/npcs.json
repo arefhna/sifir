@@ -1,0 +1,9 @@
+[
+  {"id":"investor_ali","name":"Əli Məmmədov","role":"İnvestor","specialty":"Yüksək riskli investisiyalar","description":"Təcrübəli investor, böyük layihələrə sərmayə qoyur.","initialTrust":30,"influence":70,"initialRelationship":10},
+  {"id":"vendor_aysel","name":"Aysel Quliyeva","role":"Satıcı","specialty":"Elektronika topdan satış","description":"Elektronika mallarının topdan satıcısı.","initialTrust":40,"influence":50,"initialRelationship":15},
+  {"id":"customer_rashad","name":"Rəşad Hüseynov","role":"Müştəri","specialty":"Toplu sifarişlər","description":"Daimi müştəri, böyük sifarişlər verir.","initialTrust":35,"influence":40,"initialRelationship":10},
+  {"id":"friend_nigar","name":"Nigar Əliyeva","role":"Dost","specialty":"Şəbəkə əlaqələri","description":"Geniş əlaqə şəbəkəsi olan dost.","initialTrust":60,"influence":45,"initialRelationship":25},
+  {"id":"partner_elvin","name":"Elvin Cəfərov","role":"Biznes tərəfdaşı","specialty":"Birgə investisiyalar","description":"Etibarlı biznes tərəfdaşı.","initialTrust":45,"influence":55,"initialRelationship":15},
+  {"id":"advisor_zaur","name":"Zaur İbrahimov","role":"Məsləhətçi","specialty":"Maliyyə məsləhətləri","description":"Maliyyə strategiyası üzrə məsləhətçi.","initialTrust":50,"influence":60,"initialRelationship":20},
+  {"id":"rival_orxan","name":"Orxan Səfərov","role":"Rəqib","specialty":"Aqressiv bazar strategiyası","description":"Bazarda əsas rəqibin.","initialTrust":20,"influence":65,"initialRelationship":5}
+]
