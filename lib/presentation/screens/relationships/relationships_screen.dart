@@ -5,7 +5,6 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../data/models/npc_model.dart';
 import '../../modals/loan_modal.dart';
-import '../../providers/business_providers.dart';
 import '../../providers/game_providers.dart';
 import '../../providers/npc_providers.dart';
 import '../../providers/player_notifier.dart';
@@ -118,7 +117,6 @@ class _RelationshipsScreenState extends ConsumerState<RelationshipsScreen> {
   Widget build(BuildContext context) {
     final playerState = ref.watch(playerStateProvider);
     final npcList = ref.watch(npcWithRelationshipProvider);
-    final dailyIncome = ref.watch(dailyBusinessIncomeProvider);
 
     if (playerState == null) {
       return const Scaffold(
@@ -166,8 +164,7 @@ class _RelationshipsScreenState extends ConsumerState<RelationshipsScreen> {
                     ? null
                     : _openLoan,
               ),
-              if (playerState.activeLoans.isEmpty &&
-                  playerState.debt <= 0)
+              if (playerState.activeLoans.isEmpty && playerState.debt <= 0)
                 Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
