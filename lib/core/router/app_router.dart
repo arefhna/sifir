@@ -13,6 +13,7 @@ import '../../presentation/screens/new_game_screen.dart';
 import '../../presentation/screens/profile/profile_screen.dart';
 import '../../presentation/screens/relationships/relationships_screen.dart';
 import '../../presentation/screens/settings/settings_screen.dart';
+import '../../presentation/screens/sponsors/sponsors_screen.dart';
 import '../../presentation/screens/splash_screen.dart';
 import '../../presentation/screens/statistics/statistics_screen.dart';
 
@@ -33,6 +34,7 @@ class AppRouter {
   static const String endgame = '/endgame';
   static const String settings = '/settings';
   static const String about = '/about';
+  static const String sponsors = '/sponsors';
 
   static final GoRouter router = GoRouter(
     initialLocation: splash,
@@ -97,6 +99,10 @@ class AppRouter {
       GoRoute(
         path: about,
         builder: (context, state) => const AboutScreen(),
+      ),
+      GoRoute(
+        path: sponsors,
+        builder: (context, state) => const SponsorsScreen(),
       ),
     ],
   );
