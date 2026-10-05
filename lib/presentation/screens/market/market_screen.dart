@@ -44,7 +44,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
     final playerState = ref.read(playerStateProvider);
     if (playerState == null) return;
 
-    final confirmed = await showModalBottomSheet<bool>(
+    final qty = await showModalBottomSheet<int>(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
@@ -54,18 +54,18 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
         playerReputation: playerState.reputation,
         playerRisk: playerState.risk,
         marketService: ref.read(marketServiceProvider),
-        onConfirm: (qty) => Navigator.of(ctx).pop(true),
+        onConfirm: (q) => Navigator.of(ctx).pop(q),
       ),
     );
 
-    if (confirmed != true || !mounted) return;
+    if (qty == null || qty <= 0 || !mounted) return;
 
     final notifier = ref.read(playerStateProvider.notifier);
     final service = ref.read(marketServiceProvider);
 
     final expected = service.calculateExpectedReward(
       product: product,
-      quantity: _lastQuantity,
+      quantity: qty,
       reputation: playerState.reputation,
     );
 
@@ -76,7 +76,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
 
     await notifier.startInvestment(
       title: product.name,
-      cost: product.currentPrice * _lastQuantity,
+      cost: product.currentPrice * qty,
       expectedReward: expected,
       riskPercent: effectiveRisk,
       durationDays: product.duration,
@@ -86,15 +86,11 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-          '${product.name} — $_lastQuantity ədəd investisiya edildi',
-        ),
+        content: Text('${product.name} — $qty ədəd investisiya edildi'),
         duration: const Duration(seconds: 2),
       ),
     );
   }
-
-  int _lastQuantity = 1;
 
   @override
   Widget build(BuildContext context) {
