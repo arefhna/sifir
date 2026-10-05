@@ -133,6 +133,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 color: AppColors.info,
                 onTap: () => context.push(AppRouter.statistics),
               ),
+              _MenuTile(
+                icon: Icons.campaign_outlined,
+                title: 'Sponsorlar',
+                subtitle: 'Tərəfdaş şirkətlər',
+                color: AppColors.gold,
+                onTap: () => context.push(AppRouter.sponsors),
+              ),
               if (isEndgameReady)
                 _MenuTile(
                   icon: Icons.stadium_outlined,
@@ -155,9 +162,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
                 const SizedBox(height: 12),
               ],
-              SectionHeader(
-                title: 'Son açılan achievements',
-              ),
+              const SectionHeader(title: 'Son açılan achievements'),
               if (achievements.isEmpty)
                 Container(
                   padding: const EdgeInsets.all(20),
