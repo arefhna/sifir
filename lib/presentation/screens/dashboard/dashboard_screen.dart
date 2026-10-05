@@ -4,18 +4,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../core/utils/formatters.dart';
-import '../../../data/models/challenge_model.dart';
 import '../../../data/models/event_model.dart';
 import '../../../data/models/player_state_model.dart';
+import '../../../domain/services/event_service.dart';
 import '../../modals/event_modal.dart';
 import '../../providers/challenge_providers.dart';
-import '../../providers/event_providers.dart';
+import '../../providers/game_providers.dart';
 import '../../providers/player_notifier.dart';
 import '../../widgets/day_advance_button.dart';
 import '../../widgets/empty_state.dart';
 import '../../widgets/section_header.dart';
-import '../../widgets/stat_grid.dart';
 import '../../widgets/stat_bar.dart';
+import '../../widgets/stat_grid.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
@@ -253,10 +253,13 @@ class _Header extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('SIFIR', style: AppTypography.displayLarge.copyWith(
-                fontSize: 24,
-                letterSpacing: 3,
-              )),
+              Text(
+                'SIFIR',
+                style: AppTypography.displayLarge.copyWith(
+                  fontSize: 24,
+                  letterSpacing: 3,
+                ),
+              ),
               const SizedBox(height: 2),
               Text(
                 '${state.playerName} • Gün ${state.day}',
