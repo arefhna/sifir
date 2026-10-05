@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../core/utils/formatters.dart';
-import '../../providers/game_providers.dart';
 import '../../providers/player_notifier.dart';
 import '../../widgets/empty_state.dart';
 
@@ -59,7 +58,8 @@ class StatisticsScreen extends ConsumerWidget {
             ? const EmptyState(
                 icon: Icons.bar_chart,
                 title: 'Statistika yoxdur',
-                description: 'Bir az oyna, sonra burada statistikalar görünəcək.',
+                description:
+                    'Bir az oyna, sonra burada statistikalar görünəcək.',
               )
             : SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
@@ -88,7 +88,8 @@ class StatisticsScreen extends ConsumerWidget {
                     ),
                     _StatRow(
                       label: 'Aktiv',
-                      value: '${playerState.activeInvestments.where((i) => i.status.name == 'active').length}',
+                      value:
+                          '${playerState.activeInvestments.where((i) => i.status.name == 'active').length}',
                       valueColor: AppColors.info,
                     ),
                     _StatRow(
@@ -284,7 +285,10 @@ class _MiniCard extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             value,
-            style: AppTypography.statValue.copyWith(color: color, fontSize: 18),
+            style: AppTypography.statValue.copyWith(
+              color: color,
+              fontSize: 18,
+            ),
           ),
         ],
       ),
