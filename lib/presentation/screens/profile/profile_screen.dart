@@ -6,11 +6,8 @@ import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../core/utils/formatters.dart';
-import '../../../data/models/achievement_model.dart';
-import '../../../data/models/challenge_model.dart';
 import '../../providers/achievement_providers.dart';
 import '../../providers/challenge_providers.dart';
-import '../../providers/game_providers.dart';
 import '../../providers/player_notifier.dart';
 import '../../widgets/achievement_tile.dart';
 import '../../widgets/challenge_card.dart';
@@ -42,21 +39,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     if (notifier.currentState == null) {
       await notifier.load();
     }
-    _selectDailyChallenge();
-  }
-
-  Future<void> _selectDailyChallenge() async {
-    final current = ref.read(activeChallengeProvider);
-    if (current != null) return;
-    final challenges = ref.read(challengeAvailableProvider);
-    if (challenges.isEmpty) return;
-    final service = ref.read(challengeServiceProvider);
-    final playerState = ref.read(playerStateProvider);
-    if (playerState == null) return;
-    final picked = service.pickDaily(challenges, playerState);
-    if (picked != null && mounted) {
-      ref.read(activeChallengeProvider.notifier).state = picked;
-    }
   }
 
   Future<void> _resetGame() async {
@@ -64,7 +46,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: const Text('Oyunu sıfırla?'),
-        content: const Text('Bütün irəliləyiş silinəcək. Bu geri qaytarıla bilməz.'),
+        content: const Text(
+          'Bütün irəliləyiş silinəcək. Bu geri qaytarıla bilməz.',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
@@ -194,8 +178,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         children: [
                           Text('Versiya', style: AppTypography.title),
                           const SizedBox(height: 2),
-                          Text('SIFIR v1.0.0',
-                              style: AppTypography.caption),
+                          Text('SIFIR v1.0.0', style: AppTypography.caption),
                         ],
                       ),
                     ),
