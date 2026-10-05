@@ -90,6 +90,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     }
 
     final unlockedCount = achievements.where((e) => e.value >= 1.0).length;
+    final isEndgameReady = playerState.capital >= 100000;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -108,8 +109,41 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               const SizedBox(height: 20),
               _ProfileStats(state: playerState),
               const SizedBox(height: 20),
+              const SectionHeader(title: 'Nailiyyətlər'),
+              _MenuTile(
+                icon: Icons.emoji_events,
+                title: 'Achievements',
+                subtitle: '$unlockedCount/${achievements.length} açılıb',
+                color: AppColors.gold,
+                onTap: () => context.push(AppRouter.achievements),
+              ),
+              _MenuTile(
+                icon: Icons.flag_outlined,
+                title: 'Challenge-lər',
+                subtitle: activeChallenge == null
+                    ? '${playerState.completedChallenges.length} tamamlanıb'
+                    : 'Aktiv: ${activeChallenge.title}',
+                color: AppColors.accent,
+                onTap: () => context.push(AppRouter.challenges),
+              ),
+              _MenuTile(
+                icon: Icons.bar_chart,
+                title: 'Statistika',
+                subtitle: 'Ətraflı göstəricilər',
+                color: AppColors.info,
+                onTap: () => context.push(AppRouter.statistics),
+              ),
+              if (isEndgameReady)
+                _MenuTile(
+                  icon: Icons.stadium_outlined,
+                  title: 'Oyun sonu',
+                  subtitle: 'İmperiyanı yekunlaşdır',
+                  color: AppColors.gold,
+                  onTap: () => context.push(AppRouter.endgame),
+                ),
+              const SizedBox(height: 20),
               if (activeChallenge != null) ...[
-                const SectionHeader(title: 'Gündəlik challenge'),
+                const SectionHeader(title: 'Aktiv challenge'),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: ChallengeCard(
@@ -122,7 +156,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 const SizedBox(height: 12),
               ],
               SectionHeader(
-                title: 'Achievements ($unlockedCount/${achievements.length})',
+                title: 'Son açılan achievements',
               ),
               if (achievements.isEmpty)
                 Container(
@@ -134,21 +168,35 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                 )
               else
-                ...achievements.map(
-                  (entry) => Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: AchievementTile(
-                      achievement: entry.key,
-                      unlocked: entry.value >= 1.0,
-                      progress: entry.value,
+                ...achievements.take(3).map(
+                      (entry) => Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: AchievementTile(
+                          achievement: entry.key,
+                          unlocked: entry.value >= 1.0,
+                          progress: entry.value,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
               const SizedBox(height: 16),
               const SectionHeader(title: 'Sponsor'),
               const SponsorBannerEmpty(),
               const SizedBox(height: 20),
-              const SectionHeader(title: 'Oyun'),
+              const SectionHeader(title: 'Tənzimləmələr'),
+              _MenuTile(
+                icon: Icons.settings,
+                title: 'Parametrlər',
+                subtitle: 'Save, reset, məlumat',
+                color: AppColors.textSecondary,
+                onTap: () => context.push(AppRouter.settings),
+              ),
+              _MenuTile(
+                icon: Icons.info_outline,
+                title: 'Haqqında',
+                subtitle: 'SIFIR haqqında məlumat',
+                color: AppColors.textSecondary,
+                onTap: () => context.push(AppRouter.about),
+              ),
               _MenuTile(
                 icon: Icons.refresh,
                 title: 'Oyunu sıfırla',
@@ -157,34 +205,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 onTap: _resetGame,
               ),
               const SizedBox(height: 12),
-              Container(
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: AppColors.border),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.info_outline,
-                      color: AppColors.textMuted,
-                      size: 20,
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Versiya', style: AppTypography.title),
-                          const SizedBox(height: 2),
-                          Text('SIFIR v1.0.0', style: AppTypography.caption),
-                        ],
-                      ),
-                    ),
-                  ],
+              Center(
+                child: Text(
+                  'SIFIR v1.0.0',
+                  style: AppTypography.caption,
                 ),
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -302,45 +329,53 @@ class _MenuTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.surface,
-      borderRadius: BorderRadius.circular(14),
-      child: InkWell(
-        onTap: onTap,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Material(
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(14),
-        child: Container(
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: AppColors.border),
-          ),
-          child: Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: color.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(10),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(14),
+          child: Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(color: AppColors.border),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: color.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(icon, color: color, size: 20),
                 ),
-                child: Icon(icon, color: color, size: 20),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(title, style: AppTypography.title),
-                    const SizedBox(height: 2),
-                    Text(subtitle, style: AppTypography.caption),
-                  ],
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title, style: AppTypography.title),
+                      const SizedBox(height: 2),
+                      Text(
+                        subtitle,
+                        style: AppTypography.caption,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const Icon(
-                Icons.chevron_right,
-                color: AppColors.textMuted,
-              ),
-            ],
+                const Icon(
+                  Icons.chevron_right,
+                  color: AppColors.textMuted,
+                ),
+              ],
+            ),
           ),
         ),
       ),
