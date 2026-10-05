@@ -96,11 +96,13 @@ class _RelationshipsScreenState extends ConsumerState<RelationshipsScreen> {
         playerCapital: playerState.capital,
         playerDailyIncome: playerState.dailyIncome,
         playerReputation: playerState.reputation,
-        onConfirm: (a) => Navigator.of(ctx).pop(a),
+        onConfirm: (a) {
+          if (ctx.mounted) Navigator.of(ctx).pop(a);
+        },
       ),
     );
 
-    if (amount == null || !mounted) return;
+    if (amount == null || amount <= 0 || !mounted) return;
 
     final notifier = ref.read(playerStateProvider.notifier);
     await notifier.takeLoan(amount);
@@ -109,6 +111,7 @@ class _RelationshipsScreenState extends ConsumerState<RelationshipsScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Kredit alındı: ${amount.toStringAsFixed(0)} ₼'),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
