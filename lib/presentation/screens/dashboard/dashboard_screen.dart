@@ -11,9 +11,11 @@ import '../../modals/event_modal.dart';
 import '../../providers/challenge_providers.dart';
 import '../../providers/game_providers.dart';
 import '../../providers/player_notifier.dart';
+import '../../providers/sponsor_providers.dart';
 import '../../widgets/day_advance_button.dart';
 import '../../widgets/empty_state.dart';
 import '../../widgets/section_header.dart';
+import '../../widgets/sponsor_banner.dart';
 import '../../widgets/stat_bar.dart';
 import '../../widgets/stat_grid.dart';
 
@@ -170,6 +172,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final playerState = ref.watch(playerStateProvider);
+    final dashboardSponsors = ref.watch(dashboardSponsorsProvider);
 
     if (playerState == null) {
       return Scaffold(
@@ -195,6 +198,16 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     StatGrid(state: playerState),
                     const SizedBox(height: 20),
                     _MetersSection(state: playerState),
+                    dashboardSponsors.maybeWhen(
+                      data: (sponsors) {
+                        if (sponsors.isEmpty) return const SizedBox.shrink();
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: SponsorList(sponsors: sponsors),
+                        );
+                      },
+                      orElse: () => const SizedBox.shrink(),
+                    ),
                     const SizedBox(height: 8),
                     SectionHeader(
                       title: 'Bugünkü hadisələr (${_todayEvents.length})',
