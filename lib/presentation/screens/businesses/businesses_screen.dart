@@ -5,7 +5,6 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../data/models/business_model.dart';
 import '../../providers/business_providers.dart';
-import '../../providers/game_providers.dart';
 import '../../providers/player_notifier.dart';
 import '../../widgets/business_card.dart';
 import '../../widgets/empty_state.dart';
