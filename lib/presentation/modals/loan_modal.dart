@@ -26,29 +26,29 @@ class LoanModal extends StatefulWidget {
 }
 
 class _LoanModalState extends State<LoanModal> {
-  double _amount = 1000;
+  double _amount = 500;
+  late final double _maxAmount;
+  late final double _sliderMax;
 
-  double get _maxAmount => widget.loanService.maxLoanAmount(
-        capital: widget.playerCapital,
-        dailyIncome: widget.playerDailyIncome,
-        reputation: widget.playerReputation,
-      );
+  @override
+  void initState() {
+    super.initState();
+    final maxAmount = widget.loanService.maxLoanAmount(
+      capital: widget.playerCapital,
+      dailyIncome: widget.playerDailyIncome,
+      reputation: widget.playerReputation,
+    );
+    _maxAmount = maxAmount < 100 ? 100 : maxAmount;
+    _sliderMax = _maxAmount;
+    _amount = _maxAmount < 500 ? _maxAmount : 500;
+    if (_amount < 100) _amount = 100;
+    if (_amount > _maxAmount) _amount = _maxAmount;
+  }
 
   LoanOffer get _offer => widget.loanService.generateOffer(
         principal: _amount,
         reputation: widget.playerReputation,
       );
-
-  @override
-  void initState() {
-    super.initState();
-    final max = _maxAmount;
-    if (max < 1000) {
-      _amount = max < 100 ? 100 : max;
-    } else {
-      _amount = 1000;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,12 @@ class _LoanModalState extends State<LoanModal> {
         color: AppColors.surface,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.only(
+        left: 20,
+        right: 20,
+        top: 20,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+      ),
       child: SafeArea(
         top: false,
         child: Column(
@@ -87,15 +92,18 @@ class _LoanModalState extends State<LoanModal> {
             Text('Məbləğ seçin', style: AppTypography.title),
             const SizedBox(height: 8),
             Slider(
-              value: _amount.clamp(0, _maxAmount),
-              min: 0,
-              max: _maxAmount > 100 ? _maxAmount : 100,
-              divisions: 20,
+              value: _amount.clamp(100.0, _sliderMax),
+              min: 100,
+              max: _sliderMax < 200 ? 200 : _sliderMax,
+              divisions: _sliderMax > 100
+                  ? ((_sliderMax - 100) / 100).round().clamp(1, 50)
+                  : 1,
               activeColor: AppColors.accent,
               inactiveColor: AppColors.surfaceElevated,
               onChanged: (v) => setState(() {
                 _amount = (v / 100).round() * 100.0;
                 if (_amount < 100) _amount = 100;
+                if (_amount > _maxAmount) _amount = _maxAmount;
               }),
             ),
             Center(
@@ -153,8 +161,7 @@ class _LoanModalState extends State<LoanModal> {
               child: ElevatedButton(
                 onPressed: _amount > 0
                     ? () {
-                        Navigator.of(context).pop();
-                        widget.onConfirm(_amount);
+                        Navigator.of(context).pop(_amount);
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
