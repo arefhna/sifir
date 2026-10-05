@@ -49,11 +49,15 @@ class SponsorBanner extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              Text(
-                sponsor.name,
-                style: AppTypography.caption.copyWith(
-                  color: AppColors.textSecondary,
-                  fontWeight: FontWeight.w600,
+              Flexible(
+                child: Text(
+                  sponsor.name,
+                  style: AppTypography.caption.copyWith(
+                    color: AppColors.textSecondary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
@@ -67,6 +71,25 @@ class SponsorBanner extends StatelessWidget {
           Text(
             sponsor.campaignText,
             style: AppTypography.bodySecondary,
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              const Icon(
+                Icons.link,
+                size: 14,
+                color: AppColors.textMuted,
+              ),
+              const SizedBox(width: 4),
+              Expanded(
+                child: Text(
+                  sponsor.website,
+                  style: AppTypography.caption,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -117,6 +140,32 @@ class SponsorBannerEmpty extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class SponsorList extends StatelessWidget {
+  const SponsorList({
+    required this.sponsors,
+    super.key,
+  });
+
+  final List<Sponsor> sponsors;
+
+  @override
+  Widget build(BuildContext context) {
+    if (sponsors.isEmpty) {
+      return const SponsorBannerEmpty();
+    }
+    return Column(
+      children: sponsors
+          .map(
+            (s) => Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: SponsorBanner(sponsor: s),
+            ),
+          )
+          .toList(),
     );
   }
 }
