@@ -4,16 +4,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../core/utils/formatters.dart';
+import '../../../data/models/achievement_model.dart';
 import '../../../data/models/event_model.dart';
 import '../../../data/models/player_state_model.dart';
 import '../../../domain/services/event_service.dart';
 import '../../modals/event_modal.dart';
+import '../../providers/achievement_providers.dart';
 import '../../providers/challenge_providers.dart';
 import '../../providers/game_providers.dart';
 import '../../providers/player_notifier.dart';
 import '../../providers/sponsor_providers.dart';
+import '../../widgets/achievement_popup.dart';
 import '../../widgets/day_advance_button.dart';
+import '../../widgets/day_result_sheet.dart';
 import '../../widgets/empty_state.dart';
+import '../../widgets/loading_overlay.dart';
 import '../../widgets/section_header.dart';
 import '../../widgets/sponsor_banner.dart';
 import '../../widgets/stat_bar.dart';
@@ -81,49 +86,63 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
       if (!mounted || result == null) return;
 
-      _showDayResultDialog(result);
-
       setState(() {
         _todayEvents = result.newEvents;
         _tookLoanToday = false;
       });
+
+      _showDayResultSheet(result);
     } finally {
       if (mounted) setState(() => _isAdvancing = false);
     }
   }
 
-  void _showDayResultDialog(dynamic result) {
+  void _showDayResultSheet(dynamic result) {
     final messages = <String>[];
     for (final outcome in result.investmentOutcomes) {
-      messages.add('• ${outcome.message}');
+      messages.add(outcome.message);
     }
-    if (result.loanPenalty > 0) {
-      messages.add('• Kredit cəriməsi: ${Formatters.money(result.loanPenalty)}');
-    }
-    if (result.challengeCompleted) {
-      messages.add(
-        '• Gündəlik challenge tamamlandı! +${Formatters.money(result.challengeRewardCapital)}',
-      );
-    }
-    if (messages.isEmpty) return;
 
-    showDialog<void>(
+    showModalBottomSheet<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Günün nəticəsi'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: messages.map((m) => Text(m)).toList(),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('OK'),
-          ),
-        ],
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => DayResultSheet(
+        investmentMessages: messages,
+        loanPenalty: result.loanPenalty,
+        challengeCompleted: result.challengeCompleted,
+        challengeReward: result.challengeRewardCapital,
+        newAchievementsCount: result.unlockedAchievements.length,
       ),
     );
+
+    if (result.unlockedAchievements.isNotEmpty) {
+      Future<void>.delayed(const Duration(milliseconds: 800), () {
+        if (mounted) _showAchievementPopups(result.unlockedAchievements);
+      });
+    }
+  }
+
+  Future<void> _showAchievementPopups(List<String> achievementIds) async {
+    final allAchievements = ref.read(allAchievementsProvider);
+    final catalog = allAchievements.maybeWhen(
+      data: (list) => list,
+      orElse: () => const <Achievement>[],
+    );
+
+    for (final id in achievementIds) {
+      final achievement = catalog.where((a) => a.id == id).toList();
+      if (achievement.isEmpty || !mounted) continue;
+
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (ctx) => AchievementPopup(
+          achievement: achievement.first,
+          onClose: () => Navigator.of(ctx).pop(),
+        ),
+      );
+    }
   }
 
   Future<void> _openEvent(GameEvent event) async {
@@ -185,67 +204,75 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: Column(
-          children: [
-            _Header(state: playerState),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    StatGrid(state: playerState),
-                    const SizedBox(height: 20),
-                    _MetersSection(state: playerState),
-                    dashboardSponsors.maybeWhen(
-                      data: (sponsors) {
-                        if (sponsors.isEmpty) return const SizedBox.shrink();
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: SponsorList(sponsors: sponsors),
-                        );
-                      },
-                      orElse: () => const SizedBox.shrink(),
-                    ),
-                    const SizedBox(height: 8),
-                    SectionHeader(
-                      title: 'Bugünkü hadisələr (${_todayEvents.length})',
-                    ),
-                    if (_todayEvents.isEmpty)
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 32),
-                        child: const EmptyState(
-                          icon: Icons.event_available,
-                          title: 'Bugün üçün hadisə yoxdur',
-                          description:
-                              'Növbəti günə keç və yeni fürsətlər gör.',
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Column(
+              children: [
+                _Header(state: playerState),
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        StatGrid(state: playerState),
+                        const SizedBox(height: 20),
+                        _MetersSection(state: playerState),
+                        dashboardSponsors.maybeWhen(
+                          data: (sponsors) {
+                            if (sponsors.isEmpty) {
+                              return const SizedBox.shrink();
+                            }
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 16),
+                              child: SponsorList(sponsors: sponsors),
+                            );
+                          },
+                          orElse: () => const SizedBox.shrink(),
                         ),
-                      )
-                    else
-                      ..._todayEvents.map(
-                        (e) => Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: _EventCard(
-                            event: e,
-                            onTap: () => _openEvent(e),
+                        const SizedBox(height: 8),
+                        SectionHeader(
+                          title: 'Bugünkü hadisələr (${_todayEvents.length})',
+                        ),
+                        if (_todayEvents.isEmpty)
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 32),
+                            child: const EmptyState(
+                              icon: Icons.event_available,
+                              title: 'Bugün üçün hadisə yoxdur',
+                              description:
+                                  'Növbəti günə keç və yeni fürsətlər gör.',
+                            ),
+                          )
+                        else
+                          ..._todayEvents.map(
+                            (e) => Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: _EventCard(
+                                event: e,
+                                onTap: () => _openEvent(e),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    const SizedBox(height: 20),
-                  ],
+                        const SizedBox(height: 20),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
+                  child: DayAdvanceButton(
+                    onPressed: _onAdvanceDay,
+                    isLoading: _isAdvancing,
+                  ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
-              child: DayAdvanceButton(
-                onPressed: _onAdvanceDay,
-                isLoading: _isAdvancing,
-              ),
-            ),
-          ],
-        ),
+          ),
+          if (_isAdvancing)
+            const LoadingOverlay(message: 'Gün keçirilir...'),
+        ],
       ),
     );
   }
