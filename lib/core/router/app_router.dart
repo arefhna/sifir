@@ -1,6 +1,8 @@
 import 'package:go_router/go_router.dart';
 
+import '../../presentation/screens/achievements/achievements_screen.dart';
 import '../../presentation/screens/businesses/businesses_screen.dart';
+import '../../presentation/screens/challenges/challenges_screen.dart';
 import '../../presentation/screens/dashboard/dashboard_screen.dart';
 import '../../presentation/screens/main_menu_screen.dart';
 import '../../presentation/screens/main_shell.dart';
@@ -21,6 +23,8 @@ class AppRouter {
   static const String businesses = '/businesses';
   static const String relationships = '/relationships';
   static const String profile = '/profile';
+  static const String achievements = '/achievements';
+  static const String challenges = '/challenges';
 
   static final GoRouter router = GoRouter(
     initialLocation: splash,
@@ -61,6 +65,14 @@ class AppRouter {
             builder: (context, state) => const ProfileScreen(),
           ),
         ],
+      ),
+      GoRoute(
+        path: achievements,
+        builder: (context, state) => const AchievementsScreen(),
+      ),
+      GoRoute(
+        path: challenges,
+        builder: (context, state) => const ChallengesScreen(),
       ),
     ],
   );
